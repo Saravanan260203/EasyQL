@@ -1,4 +1,3 @@
-
 import 'package:args/args.dart';
 import 'package:easyql/easyql.dart';
 
@@ -51,7 +50,9 @@ void main(List<String> arguments) async {
 
 Future<void> _createTable(ArgResults command) async {
   final tableName = command.rest[0];
-  final columnsString = command.rest.sublist(1).join(' '); // e.g., 'id as INTEGER PRIMARY KEY, name as TEXT'
+  final columnsString = command.rest
+      .sublist(1)
+      .join(' '); // e.g., 'id as INTEGER PRIMARY KEY, name as TEXT'
   final columns = _parseColumns(columnsString);
 
   final result = await EasyQL.createTable(tableName, columns: columns);
@@ -60,7 +61,8 @@ Future<void> _createTable(ArgResults command) async {
 
 Future<void> _insertRow(ArgResults command) async {
   final tableName = command.rest[0];
-  final valuesString = command.rest.sublist(1).join(' '); // e.g., 'id:1, name:John'
+  final valuesString =
+      command.rest.sublist(1).join(' '); // e.g., 'id:1, name:John'
   final values = _parseValues(valuesString);
 
   final result = await EasyQL.insertRow(tableName, values: values);
@@ -83,7 +85,8 @@ Future<void> _updateRow(ArgResults command) async {
   final whereClause = command.rest[2];
 
   final values = _parseValues(valuesString);
-  final result = await EasyQL.updateRow(tableName, values: values, where: whereClause);
+  final result =
+      await EasyQL.updateRow(tableName, values: values, where: whereClause);
   print(result['message']);
 }
 
@@ -131,15 +134,15 @@ void _printTable(List<Map<String, dynamic>> rows) {
     print('No data available.');
     return;
   }
-  
+
   final columnNames = rows[0].keys;
   final separator = '-' * 50;
-  
+
   // Print headers
   print(separator);
   print(columnNames.join(' | '));
   print(separator);
-  
+
   // Print data rows
   for (var row in rows) {
     print(row.values.join(' | '));

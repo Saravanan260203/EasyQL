@@ -1,6 +1,7 @@
-// import 'package:easyql/easyql.dart';
+import 'package:easyql/easyql.dart';
 
-// void main() {
-//   var awesome=Awesome();
-//   print('awesome: ${awesome.isAwesome}');
-// }
+void main() async {
+  // Create database
+  var result = await EasyQL.createDatabase();
+  print(result);
+}
